@@ -139,24 +139,6 @@
       });
     }
 
-    // Render <GraphiQL /> into the body.
-    // See the README in the top level of this module to learn more about
-    // how you can customize GraphiQL by providing different values or
-    // additional child elements.
-    ReactDOM.render(
-      React.createElement(GraphiQL, {
-        fetcher: graphQLFetcher,
-        query: parameters.query,
-        variables: parameters.variables,
-        operationName: parameters.operationName,
-        onEditQuery: onEditQuery,
-        onEditVariables: onEditVariables,
-        onEditOperationName: onEditOperationName,
-        defaultQuery: customQuery
-      }),
-      document.getElementById('graphiql')
-    );
-
     var customQuery = "# One endpoint to rule them all!\r\n\n" +
       "# GraphQL  : http://graphql.org/\r\n" +
       "# Apollo   : https://www.apollographql.com/client/\r\n" +
@@ -206,6 +188,24 @@
       "    clientMutationId\r\n" +
       "  }\r\n" +
       "}\r\n";
+
+    // Render <GraphiQL /> into the body.
+    // See the README in the top level of this module to learn more about
+    // how you can customize GraphiQL by providing different values or
+    // additional child elements.
+    ReactDOM.render(
+      React.createElement(GraphiQL, {
+        fetcher: graphQLFetcher,
+        query: parameters.query,
+        variables: parameters.variables,
+        operationName: parameters.operationName,
+        onEditQuery: onEditQuery,
+        onEditVariables: onEditVariables,
+        onEditOperationName: onEditOperationName,
+        defaultQuery: customQuery
+      }),
+      document.getElementById('graphiql')
+    );
   </script>
 </body>
 
