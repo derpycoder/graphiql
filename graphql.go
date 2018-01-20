@@ -8,15 +8,19 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/*", configServer)
-
-	http.Handle("/graphql", handler.New(&handler.Config{
+	h := handler.New(&handler.Config{
 		Schema: &starwars.Schema,
 		Pretty: true,
-	}))
+	})
+
+	http.Handle("/", withCORS(h.ServeHTTP))
 }
 
-func configServer(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+// Simple wrapper to Allow CORS.
+func withCORS(fn http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://www.abhijit-kar.com/*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		fn(w, r)
+	}
 }
