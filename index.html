@@ -144,18 +144,9 @@
         onEditQuery: onEditQuery,
         onEditVariables: onEditVariables,
         onEditOperationName: onEditOperationName,
-        defaultQuery: "query TheLastQuery {\r\n" +
+        defaultQuery: "query RetrieveAll {\r\n" +
           "  empire {\r\n" +
           "    name\r\n" +
-          "    ships(first: 1) {\r\n" +
-          "      edges {\r\n" +
-          "        node {\r\n" +
-          "          name\r\n" +
-          "        }\r\n" +
-          "      }\r\n" +
-          "    }\r\n" +
-          "  }\r\n" +
-          "  rebels {\r\n" +
           "    ships(first: 2) {\r\n" +
           "      edges {\r\n" +
           "        node {\r\n" +
@@ -164,15 +155,24 @@
           "      }\r\n" +
           "    }\r\n" +
           "  }\r\n" +
-          "}\r\n" +
-          "query LastButOneQuery {\r\n" +
+          "  rebels {\r\n" +
+          "    ships(last: 2) {\r\n" +
+          "      edges {\r\n" +
+          "        node {\r\n" +
+          "          name\r\n" +
+          "        }\r\n" +
+          "      }\r\n" +
+          "    }\r\n" +
+          "  }\r\n" +
+          "}\r\n\n" +
+          "query RetrieveNames {\r\n" +
           "  empire {\r\n" +
           "    custom_name: name\r\n" +
           "  }\r\n" +
           "  rebels {\r\n" +
           "    name\r\n" +
           "  }\r\n" +
-          "}\r\n" +
+          "}\r\n\n" +
           "mutation AddShip {\r\n" +
           "  introduceShip(input: {shipName: \"Nebuchadnezzar\", factionId: 1, clientMutationId: \"Morpheus\"}) {\r\n" +
           "    ship {\r\n" +
