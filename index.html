@@ -22,6 +22,14 @@
     }
   </style>
 
+  <title>GraphiQL</title>
+
+  <!-- Generic -->
+  <meta name="application-name" content="GraphiQL">
+  <meta name="description" content="GraphQL Playground">
+  <meta name="keywords" content="GraphQL, Playground, GraphiQL" />
+  <meta name="author" content="Abhijit Kar">
+
   <!--
       This GraphiQL example depends on Promise and fetch, which are available in
       modern browsers, but can be "polyfilled" for older browsers.
@@ -144,53 +152,60 @@
         onEditQuery: onEditQuery,
         onEditVariables: onEditVariables,
         onEditOperationName: onEditOperationName,
-        defaultQuery: "# GraphQL  : http://graphql.org/\r\n" +
-          "# Apollo   : https://www.apollographql.com/client/\r\n" +
-          "# EndPoint : https://custom-library-164415.appspot.com/\r\n\n" +
-          "query RetrieveAll {\r\n" +
-          "  empire {\r\n" +
-          "    name\r\n" +
-          "    ships(first: 2) {\r\n" +
-          "      edges {\r\n" +
-          "        node {\r\n" +
-          "          name\r\n" +
-          "        }\r\n" +
-          "      }\r\n" +
-          "    }\r\n" +
-          "  }\r\n" +
-          "  rebels {\r\n" +
-          "    ships(last: 2) {\r\n" +
-          "      edges {\r\n" +
-          "        node {\r\n" +
-          "          name\r\n" +
-          "        }\r\n" +
-          "      }\r\n" +
-          "    }\r\n" +
-          "  }\r\n" +
-          "}\r\n\n" +
-          "query RetrieveNames {\r\n" +
-          "  empire {\r\n" +
-          "    custom_name: name\r\n" +
-          "  }\r\n" +
-          "  rebels {\r\n" +
-          "    name\r\n" +
-          "  }\r\n" +
-          "}\r\n\n" +
-          "mutation AddShip {\r\n" +
-          "  introduceShip(input: {shipName: \"Nebuchadnezzar\", factionId: 1, clientMutationId: \"Morpheus\"}) {\r\n" +
-          "    ship {\r\n" +
-          "      id\r\n" +
-          "      name\r\n" +
-          "    }\r\n" +
-          "    faction {\r\n" +
-          "      name\r\n" +
-          "    }\r\n" +
-          "    clientMutationId\r\n" +
-          "  }\r\n" +
-          "}\r\n"
+        defaultQuery: customQuery
       }),
       document.getElementById('graphiql')
     );
+
+    var customQuery = "# One endpoint to rule them all!\r\n\n" +
+      "# GraphQL  : http://graphql.org/\r\n" +
+      "# Apollo   : https://www.apollographql.com/client/\r\n" +
+      "# EndPoint : https://custom-library-164415.appspot.com/\r\n\n" +
+      "# Supercharged GET helps in a accessing multiple data in one query\r\n" +
+      "query RetrieveAll {\r\n" +
+      "  empire {\r\n" +
+      "    name\r\n" +
+      "    ships(first: 2) {\r\n" +
+      "      ...ShipName\r\n" +
+      "    }\r\n" +
+      "  }\r\n" +
+      "  rebels {\r\n" +
+      "    ships(last: 2) {\r\n" +
+      "      ...ShipName\r\n" +
+      "    }\r\n" +
+      "  }\r\n" +
+      "}\r\n\n" +
+      "# Fragments help in reusing repeated query structure\r\n" +
+      "fragment ShipName on ShipConnection {\r\n" +
+      "  edges {\r\n" +
+      "    node {\r\n" +
+      "      name\r\n" +
+      "    }\r\n" +
+      "  }\r\n" +
+      "}\r\n\n" +
+      "# Queries can be named and tracked in History\r\n" +
+      "query RetrieveNames {\r\n" +
+      "  empire {\r\n" +
+      "    custom_name: name    # Aliasing rocks!\r\n" +
+      "  }\r\n" +
+      "  rebels {\r\n" +
+      "    name\r\n" +
+      "  }\r\n" +
+      "}\r\n\n" +
+      "# Mutations are the way to do POST, PUT and DELETE\r\n" +
+      "# Plus we decide what we get in return of such action\r\n" +
+      "mutation AddShip {\r\n" +
+      "  introduceShip(input: {shipName: \"Nebuchadnezzar\", factionId: 1, clientMutationId: \"Morpheus\"}) {\r\n" +
+      "    ship {\r\n" +
+      "      id\r\n" +
+      "      name\r\n" +
+      "    }\r\n" +
+      "    faction {\r\n" +
+      "      name\r\n" +
+      "    }\r\n" +
+      "    clientMutationId\r\n" +
+      "  }\r\n" +
+      "}\r\n";
   </script>
 </body>
 
