@@ -8,8 +8,15 @@ import (
 )
 
 func init() {
-	http.Handle("/graphql", handler.New(&handler.Config{
+	http.HandleFunc("/", configServer)
+
+	http.Handle("/", handler.New(&handler.Config{
 		Schema: &starwars.Schema,
 		Pretty: true,
 	}))
+}
+
+func configServer(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 }
