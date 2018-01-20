@@ -8,9 +8,9 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/", configServer)
+	http.HandleFunc("/*", configServer)
 
-	http.Handle("/", handler.New(&handler.Config{
+	http.Handle("/graphql", handler.New(&handler.Config{
 		Schema: &starwars.Schema,
 		Pretty: true,
 	}))
