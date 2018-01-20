@@ -172,6 +172,18 @@
           "  rebels {\r\n" +
           "    name\r\n" +
           "  }\r\n" +
+          "}\r\n" +
+          "mutation AddShip {\r\n" +
+          "  introduceShip(input: {shipName: \"Nebuchadnezzar\", factionId: 1, clientMutationId: \"Morpheus\"}) {\r\n" +
+          "    ship {\r\n" +
+          "      id\r\n" +
+          "      name\r\n" +
+          "    }\r\n" +
+          "    faction {\r\n" +
+          "      name\r\n" +
+          "    }\r\n" +
+          "    clientMutationId\r\n" +
+          "  }\r\n" +
           "}\r\n"
       }),
       document.getElementById('graphiql')
